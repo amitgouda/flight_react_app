@@ -1,0 +1,45 @@
+.flight-detail-container {
+  min-height: inherit;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.detail-container {
+  width: 800px;
+}
+
+.detail-header {
+  font-family: var(--default-font-family);
+  font-weight: unset;
+  height: 85px;
+  background: var(--header-color);
+  font-size: 24px;
+  color: var(--primary-color);
+  line-height: 1.2;
+  border-radius: 10px 10px 0px 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.detail-row {
+  display: flex;
+  background-color: var(--primary-color);
+  height: 60px;
+}
+
+.detail-row-1 {
+  background-color: var(--secondary-color) !important ;
+}
+
+.detail-column {
+  width: 50%;
+  padding-left: 12px;
+  align-self: center;
+  font-family: var(--default-font-family);
+  font-size: 17px;
+  color: gray;
+  line-height: 1.2;
+  font-weight: unset;
+}

@@ -1,6 +1,6 @@
 .table-container {
   border-collapse: collapse;
-  background: #fff;
+  background: var(--primary-color);
   border-radius: 10px;
   overflow: hidden;
   width: fit-content;
@@ -10,7 +10,7 @@
 
 table thead tr {
   height: 60px;
-  background: #36304a;
+  background: var(--header-color);
 }
 table th {
   text-align: left;

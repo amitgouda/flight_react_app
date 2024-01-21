@@ -1,7 +1,7 @@
 .header-column {
-  font-family: OpenSans-Regular;
+  font-family: var(--default-font-family);
   font-size: 18px;
-  color: #fff;
+  color: var(--primary-color);
   line-height: 1.2;
 }
 .column-cell-1 {
