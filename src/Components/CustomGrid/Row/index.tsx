@@ -7,6 +7,7 @@ interface RowProps extends React.PropsWithChildren {
   handleOnRowClick: (arg0: HANDLE_ON_ROW_CLICK) => void;
   isHeaderCell?: HANDLE_ON_ROW_CLICK["isHeaderCell"];
   rowData?: any;
+  isEven?: boolean;
 }
 
 const Row: React.FC<RowProps> = ({
@@ -14,10 +15,11 @@ const Row: React.FC<RowProps> = ({
   handleOnRowClick,
   isHeaderCell = false,
   rowData,
+  isEven = false,
 }) => {
   return (
     <tr
-      className="row-container"
+      className={`row-container  ${isEven ? "row-container-even" : ""} `}
       onClick={(e) => handleOnRowClick({ e, isHeaderCell, rowData })}
     >
       {children ? children : null}

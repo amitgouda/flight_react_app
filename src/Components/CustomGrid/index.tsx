@@ -3,9 +3,11 @@ import Row from "./Row";
 import HeaderCell from "./Cell/HeaderCell";
 import DataCell from "./Cell/RowCell";
 import { HANDLE_ON_ROW_CLICK } from "./interface";
+import "./grid.css";
 interface COLUMN {
   name: string;
   key: string;
+  helperFunc?: (argument: any) => string;
 }
 
 interface RowProps extends React.PropsWithChildren {
@@ -38,27 +40,40 @@ const CustomGrid: React.FC<RowProps> = ({
     }
   };
   return (
-    <table>
-      <Row handleOnRowClick={handleOnRowClick} isHeaderCell={true}>
-        {columns.map((column) => (
-          <HeaderCell key={column.key} name={column.name} />
-        ))}
-      </Row>
-
-      {dataProvider.map((rowData) => (
-        <Row
-          key={rowData[rowKey]}
-          rowData={rowData}
-          handleOnRowClick={handleOnRowClick}
-        >
+    <table className="table-container">
+      <thead>
+        <Row handleOnRowClick={handleOnRowClick} isHeaderCell={true}>
           {columns.map((column, index) => (
-            <DataCell
-              key={rowData[rowKey] + "_" + column.name + index}
-              name={rowData[column.key]}
+            <HeaderCell
+              key={column.key}
+              name={column.name}
+              customClassName={`column-cell-${index + 1}`}
             />
           ))}
         </Row>
-      ))}
+      </thead>
+      <tbody>
+        {dataProvider.map((rowData, index) => (
+          <Row
+            key={rowData[rowKey]}
+            rowData={rowData}
+            handleOnRowClick={handleOnRowClick}
+            isEven={(index + 1) % 2 === 0}
+          >
+            {columns.map((column, index) => (
+              <DataCell
+                key={rowData[rowKey] + "_" + column.name + index}
+                name={
+                  typeof column.helperFunc === "function"
+                    ? column.helperFunc(rowData[column.key])
+                    : rowData[column.key]
+                }
+                customClassName={`column-cell-${index + 1}`}
+              />
+            ))}
+          </Row>
+        ))}
+      </tbody>
     </table>
   );
 };

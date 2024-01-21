@@ -1,0 +1,26 @@
+.header-column {
+  font-family: OpenSans-Regular;
+  font-size: 18px;
+  color: #fff;
+  line-height: 1.2;
+}
+.column-cell-1 {
+  padding-left: 40px !important;
+  width: 135px;
+}
+
+.column-cell-2 {
+  width: 120px;
+}
+.column-cell-3 {
+  width: 120px;
+}
+.column-cell-4 {
+  width: 135px;
+}
+.column-cell-5 {
+  width: 270px;
+}
+.column-cell-6 {
+  width: 150px;
+}

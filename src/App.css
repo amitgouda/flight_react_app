@@ -1,3 +1,4 @@
 .root-container {
-  height: inherit;
+  min-height: inherit;
+  background: linear-gradient(45deg, #4158d0, #c850c0);
 }
