@@ -1,24 +1,33 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { FLIGHT_DATA } from "../Home/interface";
-import { COLUMNS } from "../Home/constants";
+import { COLUMNS } from "../../constants";
+import FlightService from "../../service/flight.service";
+
 import "./flightDetail.css";
+
 const FlightDetail: React.FC = () => {
   const { id } = useParams();
   const [flightData, setFlightData] = useState<FLIGHT_DATA>();
 
   useEffect(() => {
-    callApi(String(id));
+    const getFlightDetailsById = (flightId: string | number) => {
+      FlightService.getFlightDetailsById(
+        flightId,
+        getFlightDetailsByIdSuccessHandler,
+        getFlightDetailsByIdFaultHandler
+      );
+    };
+
+    getFlightDetailsById(String(id));
   }, [id]);
 
-  const callApi = (flightId: string) => {
-    fetch(
-      `https://flight-status-mock.core.travelopia.cloud/flights/${flightId}`
-    )
-      .then((res) => res.json())
-      .then((res: FLIGHT_DATA) => {
-        setFlightData(res);
-      });
+  const getFlightDetailsByIdSuccessHandler = (res: FLIGHT_DATA) => {
+    setFlightData(res);
+  };
+
+  const getFlightDetailsByIdFaultHandler = (err: any) => {
+    console.error(err);
   };
 
   return (

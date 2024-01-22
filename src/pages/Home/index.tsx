@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-//import Helper from "../../helper";
 import CustomGrid from "../../Components/CustomGrid";
 import { useNavigate } from "react-router-dom";
 //const CustomGrid = Helper.CustomLazyLoad("../../Components/CustomGrid");
 import { FLIGHT_DATA } from "./interface";
-import { COLUMNS } from "./constants";
+import { COLUMNS } from "../../constants";
+import FlightService from "../../service/flight.service";
+
 import "./home.css";
 
 type FLIGHT_DATA_LIST = FLIGHT_DATA[];
@@ -20,8 +21,15 @@ const Home: React.FC = () => {
   };
 
   useEffect(() => {
-    callApi();
-    const intervalRef = setInterval(callApi, UPDATE_DATA_IN_SECS);
+    const getAllFlightData = () => {
+      FlightService.getAllFlightDetails(
+        getAllFlightDetailsSuccessHandler,
+        getAllFlightDetailsFaultHandler
+      );
+    };
+
+    getAllFlightData();
+    const intervalRef = setInterval(getAllFlightData, UPDATE_DATA_IN_SECS);
 
     return () => {
       if (intervalRef) {
@@ -30,12 +38,12 @@ const Home: React.FC = () => {
     };
   }, []);
 
-  const callApi = () => {
-    fetch("https://flight-status-mock.core.travelopia.cloud/flights")
-      .then((res) => res.json())
-      .then((res: FLIGHT_DATA_LIST) => {
-        setFlightData(res);
-      });
+  const getAllFlightDetailsSuccessHandler = (res: FLIGHT_DATA_LIST) => {
+    setFlightData(res);
+  };
+
+  const getAllFlightDetailsFaultHandler = (err: any) => {
+    console.error(err);
   };
 
   return (

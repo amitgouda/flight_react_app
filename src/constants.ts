@@ -1,4 +1,4 @@
-import Helper from "../../helper";
+import Helper from "./helper";
 
 export const COLUMNS = [
   { name: "Flight Number", key: "flightNumber" },
@@ -12,3 +12,5 @@ export const COLUMNS = [
   },
   { name: "Status", key: "status" },
 ];
+
+export const API_PATH = "https://flight-status-mock.core.travelopia.cloud/";
