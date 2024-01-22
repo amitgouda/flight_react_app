@@ -17,7 +17,13 @@ const Home: React.FC = () => {
   const navigate = useNavigate();
 
   const handleOnClickRow = (id: number) => {
-    navigate(`/flight/${id}`);
+    navigate(`/flight/${id}`, {
+      state: {
+        flightData:
+          flightData.find((flightDetail) => flightDetail.id === id) || {},
+      },
+      preventScrollReset: false,
+    });
   };
 
   useEffect(() => {

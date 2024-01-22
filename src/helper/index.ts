@@ -6,7 +6,10 @@ const Helper = {
     return lazy(() => import(path));
   },
   formattedDate: (param: string) => {
-    return moment(param).format("dddd, Do MMMM YYYY - hh:mm A");
+    return param ? moment(param).format("dddd, Do MMMM YYYY - hh:mm A") : "";
+  },
+  isObject: (param: any) => {
+    return typeof param === "object" && !Array.isArray(param) && param !== null;
   },
 };
 

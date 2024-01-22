@@ -1,14 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import { FLIGHT_DATA } from "../Home/interface";
 import { COLUMNS } from "../../constants";
 import FlightService from "../../service/flight.service";
 
 import "./flightDetail.css";
+import Helper from "../../helper";
 
 const FlightDetail: React.FC = () => {
   const { id } = useParams();
-  const [flightData, setFlightData] = useState<FLIGHT_DATA>();
+  const location = useLocation();
+  const { flightData: flightParam = {} } = location?.state || {};
+  const [flightData, setFlightData] = useState<FLIGHT_DATA>(
+    Helper.isObject(flightParam) ? flightParam : {}
+  );
 
   useEffect(() => {
     const getFlightDetailsById = (flightId: string | number) => {
@@ -18,9 +23,10 @@ const FlightDetail: React.FC = () => {
         getFlightDetailsByIdFaultHandler
       );
     };
-
-    getFlightDetailsById(String(id));
-  }, [id]);
+    if (!flightData?.id) {
+      getFlightDetailsById(String(id));
+    }
+  }, [id, flightData.id]);
 
   const getFlightDetailsByIdSuccessHandler = (res: FLIGHT_DATA) => {
     setFlightData(res);
