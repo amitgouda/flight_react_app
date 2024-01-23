@@ -11,6 +11,7 @@ const Router: React.FC = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/flight/:id" element={<FlightDetail />} />
+          <Route path="*" element={<Home />} />
         </Routes>
       </Suspense>
     </BrowserRouter>
