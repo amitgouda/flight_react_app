@@ -28,13 +28,9 @@ const CustomGrid: React.FC<RowProps> = ({
     isHeaderCell,
     rowData,
   }: HANDLE_ON_ROW_CLICK) => {
-    console.log(e, isHeaderCell);
-
     const target = e.target as HTMLElement;
     if (target.tagName === "TH") {
-      console.log("header cell clicked");
     } else if (target.tagName === "TD" && !isHeaderCell) {
-      console.log(rowData);
       const id: number = rowData.id;
       handleOnClickRow(id);
     }
