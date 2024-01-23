@@ -7,3 +7,7 @@ export interface FLIGHT_DATA {
   origin: string;
   status: string;
 }
+
+export interface ERROR_RESPONSE {
+  error: string;
+}

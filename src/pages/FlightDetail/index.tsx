@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useLocation } from "react-router-dom";
-import { FLIGHT_DATA } from "../Home/interface";
+import { ERROR_RESPONSE, FLIGHT_DATA } from "../Home/interface";
 import { COLUMNS } from "../../constants";
 import FlightService from "../../service/flight.service";
 
@@ -28,8 +28,14 @@ const FlightDetail: React.FC = () => {
     }
   }, [id, flightData.id]);
 
-  const getFlightDetailsByIdSuccessHandler = (res: FLIGHT_DATA) => {
-    setFlightData(res);
+  const getFlightDetailsByIdSuccessHandler = (
+    res: FLIGHT_DATA | ERROR_RESPONSE
+  ) => {
+    if (!("error" in res)) {
+      setFlightData(res);
+    } else {
+      window.showSnackbar(res.error);
+    }
   };
 
   const getFlightDetailsByIdFaultHandler = (err: any) => {

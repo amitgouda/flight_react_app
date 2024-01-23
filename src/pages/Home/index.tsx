@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import CustomGrid from "../../Components/CustomGrid";
 import { useNavigate } from "react-router-dom";
 //const CustomGrid = Helper.CustomLazyLoad("../../Components/CustomGrid");
-import { FLIGHT_DATA } from "./interface";
+import { ERROR_RESPONSE, FLIGHT_DATA } from "./interface";
 import { COLUMNS } from "../../constants";
 import FlightService from "../../service/flight.service";
 
@@ -44,8 +44,14 @@ const Home: React.FC = () => {
     };
   }, []);
 
-  const getAllFlightDetailsSuccessHandler = (res: FLIGHT_DATA_LIST) => {
-    setFlightData(res);
+  const getAllFlightDetailsSuccessHandler = (
+    res: FLIGHT_DATA_LIST | ERROR_RESPONSE
+  ) => {
+    if ("error" in res) {
+      window.showSnackbar(res.error);
+    } else {
+      setFlightData(res);
+    }
   };
 
   const getAllFlightDetailsFaultHandler = (err: any) => {
