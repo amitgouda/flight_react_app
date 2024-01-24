@@ -43,6 +43,7 @@ const FlightDetail: React.FC = () => {
         <div>
           {COLUMNS.map((columnData, index) => (
             <div
+              key={columnData.name}
               className={`detail-row ${index % 2 === 0 ? "detail-row-1" : ""}`}
             >
               <div className="detail-column ">{columnData.name} </div>

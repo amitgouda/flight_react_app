@@ -27,7 +27,6 @@ const Home: React.FC = () => {
         getAllFlightDetailsFaultHandler
       );
     };
-
     getAllFlightData();
     const intervalRef = setInterval(getAllFlightData, UPDATE_DATA_IN_SECS);
 

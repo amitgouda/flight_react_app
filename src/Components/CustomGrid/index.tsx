@@ -48,7 +48,7 @@ const CustomGrid: React.FC<RowProps> = ({
           ))}
         </Row>
       </thead>
-      <tbody>
+      <tbody data-testid="table-body">
         {dataProvider.map((rowData, index) => (
           <Row
             key={rowData[rowKey]}
